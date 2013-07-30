@@ -1,8 +1,15 @@
+var express = require('express');
 var fs = require('fs');
+var htmlfile = "index.html";
+var app = express.createServer(express.logger());
+app.get('/', function(request, response){
+	var html = fs.readFile(htmlfile).toString();
+	response.send(html);
+});
 
-fs.readFile('index.html', function(err,data) {
-  if(err)throw err;
-  console.log(data.toString());
+var port = process.env.PORT || 8080;
+app.listen(port, function(){
+	console.log("Liatening on " +port);
 });
 
 
